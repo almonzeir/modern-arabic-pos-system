@@ -33,7 +33,7 @@ class SilverPOSApp extends StatelessWidget {
           titleTextStyle: TextStyle(color: Color(0xFF2D3436), fontSize: 20, fontWeight: FontWeight.bold),
           iconTheme: IconThemeData(color: Color(0xFF2D3436)),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: Colors.white,
           elevation: 4,
           shadowColor: Colors.black.withOpacity(0.05),

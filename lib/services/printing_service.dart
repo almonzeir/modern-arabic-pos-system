@@ -29,7 +29,7 @@ class PrintingService {
                 return pw.Padding(
                   padding: const pw.EdgeInsets.symmetric(vertical: 2),
                   child: pw.Row(
-                    mainAxisAlignment: pw.MainConstraints.spaceBetween,
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
                       pw.Text('${item.item.name} × ${item.quantity}', style: pw.TextStyle(font: font)),
                       pw.Text('${(item.item.price * item.quantity).toStringAsFixed(2)} ريال', style: pw.TextStyle(font: font)),
@@ -39,7 +39,7 @@ class PrintingService {
               }).toList(),
               pw.Divider(),
               pw.Row(
-                mainAxisAlignment: pw.MainConstraints.spaceBetween,
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text('الإجمالي', style: pw.TextStyle(font: fontBold, fontSize: 16)),
                   pw.Text('${total.toStringAsFixed(2)} ريال', style: pw.TextStyle(font: fontBold, fontSize: 16)),
