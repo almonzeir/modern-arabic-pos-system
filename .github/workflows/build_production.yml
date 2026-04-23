@@ -22,7 +22,7 @@ jobs:
       run: flutter pub get
 
     - name: Build Windows Release
-      run: flutter build windows --release --obfuscate --split-debug-info=build/debug_info
+      run: flutter build windows --release
 
     - name: Create MSIX Installer
       # Removed the broken flag. Added continue-on-error so the ZIP build always runs.
