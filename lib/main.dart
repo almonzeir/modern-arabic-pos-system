@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'providers/pos_provider.dart';
 import 'screens/cashier_screen.dart';
 import 'screens/admin_screen.dart';
@@ -28,15 +26,16 @@ class SilverPOSApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Colors.indigoAccent,
         scaffoldBackgroundColor: const Color(0xFFF8F9FA), 
-        textTheme: GoogleFonts.cairoTextTheme(ThemeData.light().textTheme).copyWith(
-          headlineMedium: GoogleFonts.cairo(fontWeight: FontWeight.bold, color: const Color(0xFF2D3436)),
-          bodyLarge: GoogleFonts.cairo(fontSize: 16, color: const Color(0xFF2D3436)),
+        fontFamily: 'ArabicFont',
+        textTheme: const TextTheme(
+          headlineMedium: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF2D3436)),
+          bodyLarge: TextStyle(fontSize: 16, color: Color(0xFF2D3436)),
         ),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,
-          titleTextStyle: GoogleFonts.cairo(color: const Color(0xFF2D3436), fontSize: 20, fontWeight: FontWeight.bold),
-          iconTheme: const IconThemeData(color: Color(0xFF2D3436)),
+          titleTextStyle: TextStyle(color: Color(0xFF2D3436), fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'ArabicFont'),
+          iconTheme: IconThemeData(color: Color(0xFF2D3436)),
         ),
       ),
       builder: (context, child) {

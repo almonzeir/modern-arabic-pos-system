@@ -19,7 +19,6 @@ dependencies:
   intl: ^0.20.2
   provider: ^6.1.5+1
   url_launcher: ^6.3.0 
-  google_fonts: 6.1.0
   font_awesome_flutter: ^10.9.0
 
 dev_dependencies:
@@ -40,6 +39,10 @@ flutter_launcher_icons:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: ArabicFont
+      fonts:
+        - asset: assets/fonts/arial.ttf
 
 msix_config:
   display_name: نظام المبيعات الحديث
@@ -50,4 +53,3 @@ msix_config:
   logo_path: assets/logo.jpg
   install_certificate: false
   capabilities: internetClient, privateNetworkClientServer
-

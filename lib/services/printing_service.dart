@@ -1,4 +1,5 @@
 
+import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -8,16 +9,16 @@ class PrintingService {
   static Future<void> printReceipt(List<CartItem> cart, double total, String cafeteriaName, String receiptTitle) async {
     final doc = pw.Document();
 
-    // High-quality Arabic font embedding for thermal printers
-    final font = await PdfGoogleFonts.cairoRegular();
-    final fontBold = await PdfGoogleFonts.cairoBold();
+    // Load local font asset instead of Google Fonts to avoid Windows build issues
+    final fontData = await rootBundle.load("assets/fonts/arial.ttf");
+    final font = pw.Font.ttf(fontData);
 
     doc.addPage(
       pw.Page(
         pageFormat: PdfPageFormat.roll80,
         theme: pw.ThemeData.withFont(
           base: font,
-          bold: fontBold,
+          bold: font, // Using same font for simplicity, Arial is robust
         ),
         build: (pw.Context context) {
           return pw.Column(
@@ -27,7 +28,7 @@ class PrintingService {
                 child: pw.Directionality(
                   textDirection: pw.TextDirection.rtl,
                   child: pw.Text(cafeteriaName, 
-                  style: pw.TextStyle(font: fontBold, fontSize: 18))
+                  style: pw.TextStyle(font: font, fontSize: 18))
                 ),
               ),
               pw.Center(
@@ -63,9 +64,9 @@ class PrintingService {
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
                     pw.Text('الإجمالي', 
-                    style: pw.TextStyle(font: fontBold, fontSize: 14)),
+                    style: pw.TextStyle(font: font, fontSize: 14)),
                     pw.Text('${total.toStringAsFixed(2)} جنيه', 
-                    style: pw.TextStyle(font: fontBold, fontSize: 14)),
+                    style: pw.TextStyle(font: font, fontSize: 14)),
                   ],
                 ),
               ),
