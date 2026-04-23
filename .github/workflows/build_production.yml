@@ -1,0 +1,34 @@
+
+name: Build Arabic POS Installer
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+
+    - name: Install Dependencies
+      run: flutter pub get
+
+    - name: Build Windows Release
+      run: flutter build windows --release --obfuscate --split-debug-info=build/debug_info
+
+    - name: Create MSIX Installer
+      run: dart run msix:create
+
+    - name: Upload Installer
+      uses: actions/upload-artifact@v3
+      with:
+        name: Arabic-POS-Installer
+        path: build\windows\x64\runner\Release\*.msix

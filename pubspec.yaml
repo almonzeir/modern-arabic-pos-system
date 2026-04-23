@@ -1,0 +1,38 @@
+name: silver_pos
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  sqflite_common_ffi: ^2.3.4+4
+  sqlite3_flutter_libs: ^0.5.42
+  path: ^1.9.0
+  path_provider: ^2.1.5
+  printing: ^5.14.3
+  pdf: ^3.11.3
+  intl: ^0.20.2
+  provider: ^6.1.5+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  msix: ^3.16.13
+
+flutter:
+  uses-material-design: true
+
+msix_config:
+  display_name: نظام المبيعات الحديث
+  publisher_display_name: كافتيريا الحي
+  publisher: CN=CafeteriaLocal
+  identity_name: com.local.silverpos
+  msix_version: 1.0.0.0
+  install_certificate: true
+  capabilities: internetClient, privateNetworkClientServer
