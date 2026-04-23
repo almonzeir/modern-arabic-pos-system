@@ -53,7 +53,7 @@ class _CashierScreenState extends State<CashierScreen> {
                       return ListTile(
                         contentPadding: EdgeInsets.zero,
                         title: Text(cartItem.item.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text('${(cartItem.item.price * cartItem.quantity).toStringAsFixed(2)} ج.س'),
+                        subtitle: Text('${(cartItem.item.price * cartItem.quantity).toStringAsFixed(2)} جنيه'),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -71,7 +71,7 @@ class _CashierScreenState extends State<CashierScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('الإجمالي', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    Text('${pos.totalAmount.toStringAsFixed(2)} ج.س', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.indigoAccent)),
+                    Text('${pos.totalAmount.toStringAsFixed(2)} جنيه', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.indigoAccent)),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -138,7 +138,7 @@ class _CashierScreenState extends State<CashierScreen> {
                               FaIcon(icon, size: 40, color: Colors.indigoAccent),
                               const SizedBox(height: 12),
                               Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              Text('${item.price.toStringAsFixed(2)} ج.س', style: const TextStyle(color: Colors.grey)),
+                              Text('${item.price.toStringAsFixed(2)} جنيه', style: const TextStyle(color: Colors.grey)),
                             ],
                           ),
                         ),

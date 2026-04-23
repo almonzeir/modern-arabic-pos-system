@@ -71,7 +71,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     TextField(
                       controller: _priceController, 
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                      decoration: const InputDecoration(labelText: 'السعر', border: OutlineInputBorder(), suffixText: 'ج.س')
+                      decoration: const InputDecoration(labelText: 'السعر', border: OutlineInputBorder(), suffixText: 'جنيه')
                     ),
                     const SizedBox(height: 16),
                     TextField(controller: _categoryController, decoration: const InputDecoration(labelText: 'التصنيف', border: OutlineInputBorder())),
@@ -103,7 +103,7 @@ class _AdminScreenState extends State<AdminScreen> {
                         final item = pos.menuItems[index];
                         return ListTile(
                           title: Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: Text('${item.category} • ${item.price.toStringAsFixed(2)} ج.س'),
+                          subtitle: Text('${item.category} • ${item.price.toStringAsFixed(2)} جنيه'),
                           trailing: IconButton(icon: const Icon(Icons.delete_outline, color: Colors.red), onPressed: () => pos.deleteMenuItem(item.id!)),
                         );
                       },

@@ -38,7 +38,7 @@ class PrintingService {
                     children: [
                       pw.Text('${item.item.name} × ${item.quantity}', 
                       style: pw.TextStyle(font: font, fontSize: 10)),
-                      pw.Text('${(item.item.price * item.quantity).toStringAsFixed(2)} ج.س', 
+                      pw.Text('${(item.item.price * item.quantity).toStringAsFixed(2)} جنيه', 
                       style: pw.TextStyle(font: font, fontSize: 10)),
                     ],
                   ),
@@ -50,7 +50,7 @@ class PrintingService {
                 children: [
                   pw.Text('الإجمالي', 
                   style: pw.TextStyle(font: fontBold, fontSize: 14)),
-                  pw.Text('${total.toStringAsFixed(2)} ج.س', 
+                  pw.Text('${total.toStringAsFixed(2)} جنيه', 
                   style: pw.TextStyle(font: fontBold, fontSize: 14)),
                 ],
               ),
