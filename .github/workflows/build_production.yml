@@ -1,5 +1,5 @@
 
-name: Build Arabic POS Installer
+name: Build Arabic POS Production Installer v2
 
 on:
   push:
