@@ -1,5 +1,5 @@
 
-name: Build Arabic POS Production Installer v2
+name: Build Arabic POS Production Installer v3
 
 on:
   push:
@@ -25,10 +25,17 @@ jobs:
       run: flutter build windows --release --obfuscate --split-debug-info=build/debug_info
 
     - name: Create MSIX Installer
-      run: dart run msix:create
+      # Added --no-install-certificate to the command line to force it to be non-interactive
+      run: dart run msix:create --no-install-certificate
 
-    - name: Upload Installer
+    - name: Create EXE Zip Fallback
+      run: |
+        powershell Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath build\Arabic-POS-Portable.zip
+
+    - name: Upload Installer Files
       uses: actions/upload-artifact@v4
       with:
-        name: Arabic-POS-Installer
-        path: build\windows\x64\runner\Release\*.msix
+        name: Arabic-POS-Production-Files
+        path: |
+          build\windows\x64\runner\Release\*.msix
+          build\Arabic-POS-Portable.zip

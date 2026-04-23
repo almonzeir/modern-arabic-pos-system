@@ -34,5 +34,5 @@ msix_config:
   publisher: CN=CafeteriaLocal
   identity_name: com.local.silverpos
   msix_version: 1.0.0.0
-  install_certificate: true
+  install_certificate: false
   capabilities: internetClient, privateNetworkClientServer
