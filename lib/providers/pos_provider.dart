@@ -15,10 +15,14 @@ class POSProvider extends ChangeNotifier {
   final List<CartItem> _cart = [];
   final DBHelper _db = DBHelper();
   double _todayTotalSales = 0.0;
+  String _cafeteriaName = 'كافتيريا الحي';
+  String _receiptTitle = 'إيصال مبيعات';
 
   List<MenuItem> get menuItems => _menuItems;
   List<CartItem> get cart => _cart;
   double get todayTotalSales => _todayTotalSales;
+  String get cafeteriaName => _cafeteriaName;
+  String get receiptTitle => _receiptTitle;
 
   double get totalAmount {
     return _cart.fold(0, (sum, item) => sum + (item.item.price * item.quantity));
@@ -30,6 +34,7 @@ class POSProvider extends ChangeNotifier {
   }
 
   Future<void> fetchMenu() async {
+    await fetchSettings();
     _menuItems = await _db.getMenuItems();
     if (_menuItems.isEmpty) {
       // Sudanese Cafeteria Seed Data
@@ -41,6 +46,20 @@ class POSProvider extends ChangeNotifier {
       _menuItems = await _db.getMenuItems();
     }
     await calculateTodaySales();
+    notifyListeners();
+  }
+
+  Future<void> fetchSettings() async {
+    _cafeteriaName = await _db.getSetting('cafeteriaName', 'كافتيريا الحي');
+    _receiptTitle = await _db.getSetting('receiptTitle', 'إيصال مبيعات');
+    notifyListeners();
+  }
+
+  Future<void> updateSettings(String name, String title) async {
+    _cafeteriaName = name;
+    _receiptTitle = title;
+    await _db.updateSetting('cafeteriaName', name);
+    await _db.updateSetting('receiptTitle', title);
     notifyListeners();
   }
 

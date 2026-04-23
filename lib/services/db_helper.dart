@@ -34,7 +34,7 @@ class DBHelper {
 
     return await openDatabase(
       path,
-      version: 2, // Incremented version to add category
+      version: 3, // Incremented version to add Settings
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE MenuItems (
@@ -52,13 +52,54 @@ class DBHelper {
             status TEXT NOT NULL
           )
         ''');
+        await db.execute('''
+          CREATE TABLE Settings (
+            key TEXT PRIMARY KEY,
+            value TEXT NOT NULL
+          )
+        ''');
+        // Default Settings
+        await db.insert('Settings', {'key': 'cafeteriaName', 'value': 'كافتيريا الحي'});
+        await db.insert('Settings', {'key': 'receiptTitle', 'value': 'إيصال مبيعات'});
       },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
           await db.execute("ALTER TABLE MenuItems ADD COLUMN category TEXT NOT NULL DEFAULT 'General'");
         }
+        if (oldVersion < 3) {
+          await db.execute('''
+            CREATE TABLE Settings (
+              key TEXT PRIMARY KEY,
+              value TEXT NOT NULL
+            )
+          ''');
+          await db.insert('Settings', {'key': 'cafeteriaName', 'value': 'كافتيريا الحي'});
+          await db.insert('Settings', {'key': 'receiptTitle', 'value': 'إيصال مبيعات'});
+        }
       },
     );
+  }
+
+  Future<void> updateSetting(String key, String value) async {
+    final db = await database;
+    await db.insert(
+      'Settings',
+      {'key': key, 'value': value},
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<String> getSetting(String key, String defaultValue) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'Settings',
+      where: 'key = ?',
+      whereArgs: [key],
+    );
+    if (maps.isNotEmpty) {
+      return maps.first['value'] as String;
+    }
+    return defaultValue;
   }
 
   Future<int> insertMenuItem(MenuItem item) async {
