@@ -32,10 +32,13 @@ class POSProvider extends ChangeNotifier {
   Future<void> fetchMenu() async {
     _menuItems = await _db.getMenuItems();
     if (_menuItems.isEmpty) {
-      await addMenuItem('قهوة إسبريسو', 3.50, 'مشروبات');
-      await addMenuItem('كابتشينو', 4.50, 'مشروبات');
-      await addMenuItem('ساندوتش كلوب', 8.00, 'طعام');
-      await addMenuItem('مافن شوكولاتة', 4.00, 'مخبوزات');
+      // Sudanese Cafeteria Seed Data
+      await addMenuItem('قهوة سوداء', 500.0, 'مشروبات');
+      await addMenuItem('شاي سادة', 300.0, 'مشروبات');
+      await addMenuItem('ساندوتش طعمية', 1200.0, 'طعام');
+      await addMenuItem('بيرغر لحم', 2500.0, 'طعام');
+      await addMenuItem('بسبوسة', 800.0, 'حلويات');
+      _menuItems = await _db.getMenuItems();
     }
     await calculateTodaySales();
     notifyListeners();
@@ -63,11 +66,6 @@ class POSProvider extends ChangeNotifier {
 
   void clearCart() {
     _cart.clear();
-    notifyListeners();
-  }
-
-  void removeFromCart(CartItem cartItem) {
-    _cart.remove(cartItem);
     notifyListeners();
   }
 
